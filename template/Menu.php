@@ -9,6 +9,7 @@
 class Menu
 {
     private $menuOptions = array("Home","About Us","Contact");
+    private $menuLinks = array("#","#","#");
     private $menuType;
 
     public function __construct($type){
@@ -19,20 +20,20 @@ class Menu
         if($this->menuType == 1){
             echo '
             <ul class="ul-menu">';
-            $i=1;
+            $i=0;
             foreach($this->menuOptions as &$opt) {
-                if($active == $i){
+                if($active-1 == $i){
                     $activeOpt = "active";
                 }
                 else{
                     $activeOpt = "";
                 }
-                $i++;
                 echo '
                     <li class="li-menu ' . $activeOpt . '">
-                        <a href="#">' . $opt . '</a>
+                        <a href="'.$this->menuLinks[$i].'">' . $opt . '</a>
                     </li>                   
                 ';
+                $i++;
             }
             echo '</ul>';
         }
