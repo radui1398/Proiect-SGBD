@@ -33,27 +33,19 @@ $header->generateHeader();
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action active" disabled>
-                        Administrare clienti
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action">Adaugare Client</button>
-                    <button type="button" class="list-group-item list-group-item-action">Stergere Client</button>
-                    <button type="button" class="list-group-item list-group-item-action">Modificare Client</button>
-                    <button type="button" class="list-group-item list-group-item-action">Afisarea tuturor clientilor
-                    </button>
-                </div>
+                <?php
+                    require_once("template/ListGroup.php");
+                    $list = array("Adaugare client","Stergere Client","Modificare Client","Afisarea tuturor clientilor");
+                    $listGroup = new ListGroup("Administrare clienti",$list);
+                    $listGroup->generateGroup();
+                ?>
             </div>
             <div class="col">
-                <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action active" disabled>
-                        Administrare buget
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action">Adaugare Imprumut</button>
-                    <button type="button" class="list-group-item list-group-item-action">Plata Imprumut</button>
-                    <button type="button" class="list-group-item list-group-item-action">Modificare Dobanda</button>
-                    <button type="button" class="list-group-item list-group-item-action">Adaugare Venit</button>
-                </div>
+                <?php
+                    $list = array("Adaugare Imprumut","Plata Imprumut","Modificare Dobanda","Adaugare venit");
+                    $listGroup = new ListGroup("Administrare buget",$list);
+                    $listGroup->generateGroup();
+                ?>
             </div>
         </div>
     </div>
