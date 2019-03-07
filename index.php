@@ -1,7 +1,11 @@
 <!doctype html>
 
 <html lang="ro">
-
+<?php
+require_once ("template/Header.php");
+$header = new Header("BMS");
+$header->generateHeader();
+?>
 <body>
 <div class="content">
     <div class="custom-header">
@@ -11,17 +15,11 @@
                     <div class="custom-title">BMS</div>
                 </div>
                 <div class="col">
-                    <ul class="ul-menu">
-                        <li class="li-menu active">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="li-menu">
-                            <a href="#">About Us</a>
-                        </li>
-                        <li class="li-menu">
-                            <a href="#">Contact</a>
-                        </li>
-                    </ul>
+                    <?php
+                    require_once ("template/Menu.php");
+                    $menu = new Menu(1);
+                    $menu->generateMenu(1);
+                    ?>
                 </div>
             </div>
         </div>
