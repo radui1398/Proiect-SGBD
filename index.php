@@ -55,7 +55,7 @@ $header->generateHeader();
         <div class="row">
             <div class="col">
                 <div class="credits">
-                    Website realizat de: Radu Ionut si Andrei Mardare.
+                    Website realizat de: Radu Ionut-Alexandru si Andrei Mardare.
                 </div>
             </div>
         </div>
