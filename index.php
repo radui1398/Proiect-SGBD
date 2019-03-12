@@ -3,6 +3,7 @@
 <html lang="ro">
 <?php
 require_once ("template/Header.php");
+require_once ("template/functions.php");
 $header = new Header("BMS");
 $header->generateHeader();
 ?>
@@ -18,12 +19,16 @@ $header->generateHeader();
                     <?php
                     require_once ("template/Menu.php");
                     $menu = new Menu(1);
-                    $menu->generateMenu(1);
+                    $active = getActive();
+                    $menu->generateMenu($active);
                     ?>
                 </div>
             </div>
         </div>
     </div>
+    <?php
+        //generate jumbotron
+    ?>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Despre BMS</h1>
@@ -31,25 +36,17 @@ $header->generateHeader();
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <?php
-                    require_once("template/ListGroup.php");
-                    $list = array("Adaugare client","Stergere Client","Modificare Client","Afisarea tuturor clientilor");
-                    $listGroup = new ListGroup("Administrare clienti",$list);
-                    $listGroup->generateGroup();
-                ?>
-            </div>
-            <div class="col">
-                <?php
-                    $list = array("Adaugare Imprumut","Plata Imprumut","Modificare Dobanda","Adaugare venit");
-                    $listGroup = new ListGroup("Administrare buget",$list);
-                    $listGroup->generateGroup();
-                ?>
-            </div>
-        </div>
+        <?php
+            if(getVarFromPage("page") === "join") {
+                include("template/Join.php");
+            }
+            else{
+                include("template/Home.php");
+            }
+        ?>
     </div>
 </div>
+
 <footer class="section footer-classic footer-height">
     <div class="container">
         <div class="row">
@@ -61,5 +58,6 @@ $header->generateHeader();
         </div>
     </div>
 </footer>
+
 </body>
 </html>
