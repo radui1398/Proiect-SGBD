@@ -2,7 +2,7 @@
     <div class="col">
         <?php
             require_once("template/ListGroup.php");
-            $list = array("Adaugare client","Stergere Client","Modificare Client","Afisarea tuturor clientilor");
+            $list = array("Adaugare banca","Stergere Client","Modificare Client","Afisarea tuturor clientilor");
             $listGroup = new ListGroup("Administrare clienti",$list);
             $listGroup->generateGroup();
         ?>

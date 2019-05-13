@@ -37,6 +37,8 @@ $header->generateHeader();
     </div>
     <div class="container">
         <?php
+            require_once ('template/Database.php');
+            $db = Database::getInstance();
             if(getVarFromPage("page") === "join") {
                 include("template/Join.php");
             }
