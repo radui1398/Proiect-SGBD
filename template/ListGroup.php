@@ -23,8 +23,8 @@ class ListGroup
                     <button type="button" class="list-group-item list-group-item-action active" disabled>
         '.$this->title.'
         </button>';
-        foreach($this->list as &$item)
-                    echo '<button type="button" class="list-group-item list-group-item-action">'.$item.'</button>';
+        foreach($this->list as $item=>$link)
+                    echo '<a class="list-group-item list-group-item-action" href="?page='.$link.'">'.$item.'</a>';
         echo '</div>';
     }
 }

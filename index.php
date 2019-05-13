@@ -4,6 +4,8 @@
 <?php
 require_once ("template/Header.php");
 require_once ("template/functions.php");
+require_once ("template/Form.php");
+require_once ('template/Database.php');
 $header = new Header("BMS");
 $header->generateHeader();
 ?>
@@ -26,9 +28,6 @@ $header->generateHeader();
             </div>
         </div>
     </div>
-    <?php
-        //generate jumbotron
-    ?>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Despre BMS</h1>
@@ -37,13 +36,15 @@ $header->generateHeader();
     </div>
     <div class="container">
         <?php
-            require_once ('template/Database.php');
-            $db = Database::getInstance();
-            if(getVarFromPage("page") === "join") {
-                include("template/Join.php");
-            }
-            else{
-                include("template/Home.php");
+            switch(getVarFromPage("page")) {
+                case "join":
+                    include ("template/Join.php");
+                    break;
+                case "addBank":
+                    include ("template/addBank.php");
+                    break;
+                default:
+                    include("template/Home.php");
             }
         ?>
     </div>

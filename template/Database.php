@@ -8,8 +8,7 @@ class Database
 
     private function __construct()
     {
-        phpinfo();
-        $db = "(DESCRIPTION=(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 000.000.000.000)(PORT = 1521)))(CONNECT_DATA=(SID=XXX)))";
+        $db = "(DESCRIPTION=(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))))";
         $conn = oci_connect("BMS", "BMS",$db);
         if (!$conn) {
             $m = oci_error();
@@ -17,7 +16,7 @@ class Database
             exit;
         }
         else {
-            print "Oracle database connection online". PHP_EOL;
+            self::$conn = $conn;
         }
 
     }

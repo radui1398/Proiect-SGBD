@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <form>
-                        <?
+                        <?php
                         $nrOfFormGroup=7;
                         $labelText = Array("First Name","Last Name","Address","City","State","Phone","CNP");
                         $type = Array("text","text","text","text","text","tel","text");
@@ -11,7 +11,7 @@
                         $id = Array("inputFirstName","inputLastName","inputAddress","inputCity","inputState","inputPhone","inputCNP");
                         $placeHolder = Array("Enter First Name","Enter Last Name","Enter Address","Enter City","Enter State","Enter Phone", "Enter CNP");
                         ?>
-                        <? for($i = 0;$i<$nrOfFormGroup;$i++):?>
+                        <?for($i = 0;$i<$nrOfFormGroup;$i++):?>
                             <?=($i%2==0) ? '<div class="form-row">' : ''?>
                                 <div class="form-group col-md-6">
                                     <label for="<?=$id[$i]?>"><?=$labelText[$i]?></label>
