@@ -53,7 +53,10 @@ END show_last_transactions;
 
 PROCEDURE show_due_date(p_arr OUT v_array) IS 
 BEGIN 
-     SELECT CARD_NUMBER || '%' || EXP BULK COLLECT INTO p_arr FROM (SELECT * FROM card WHERE exp<SYSDATE);
+     SELECT CARD_NUMBER || '%' || EXP || '%' ||fname || ' ' || lname
+     BULK COLLECT INTO p_arr FROM (SELECT c.card_number,c.exp,c1.fname,c1.lname FROM card c
+     JOIN has h ON c.fk_id=h.account_id 
+     JOIN clients c1 ON c1.id=h.CLIENT_ID WHERE c.exp<SYSDATE);
      EXCEPTION
      WHEN NO_DATA_FOUND THEN
      p_arr(1) := 'Nu am gasit nici un card.';
