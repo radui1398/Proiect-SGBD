@@ -4,10 +4,10 @@
             <div class="card-body">
                 <?php
                 $form = new Form();
-                $form->setLabels(array("NAME"=>"Numele Bancii","ADDRESS"=>"Adresa Bancii"));
-                $form->create("BANK");
-                $form->generate();
-                ?>
+                $form->setLabels(array("NAME" => "Numele Bancii", "ADDRESS" => "Adresa Bancii"));
+                $form->create("ATM","ATM_NO");
+                $form->waitForPost();
+                $form->generate(); ?>
             </div>
         </div>
     </div>
@@ -19,4 +19,5 @@
         </div>
 
     </div>
+
 </div>
