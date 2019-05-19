@@ -1,5 +1,5 @@
 ﻿CREATE OR REPLACE PACKAGE manager AS
-  TYPE v_array IS TABLE OF VARCHAR(10) INDEX BY BINARY_INTEGER;
+  TYPE v_array IS TABLE OF VARCHAR(100) INDEX BY BINARY_INTEGER;
   PROCEDURE insert_into_table(table_name in VARCHAR2, id_name in VARCHAR2, type_column in v_array, data in v_array, result out VARCHAR2);
   PROCEDURE show_last_transactions(p_arr out v_array);
   PROCEDURE show_due_date(p_arr OUT v_array);
@@ -47,12 +47,15 @@ END insert_into_table;
 
 PROCEDURE show_last_transactions(p_arr out v_array) IS
 BEGIN
-     SELECT CARD_ID||ATM_ID||TRANSACTION_DATE||SUM bulk COLLECT into p_arr from (select * FROM TRANSACTION ORDER BY id DESC) WHERE ROWNUM<11;
+     SELECT CARD_ID || '%' || ATM_ID || '%' || TRANSACTION_DATE || '%' || SUM || ' Lei' bulk COLLECT into p_arr from (select * FROM TRANSACTION ORDER BY TRANSACTION_DATE DESC) WHERE ROWNUM<11;
 END show_last_transactions;
 
 PROCEDURE show_due_date(p_arr OUT v_array) IS 
 BEGIN 
-     SELECT CARD_NUMBER||EXP BULK COLLECT INTO p_arr FROM (SELECT * FROM card WHERE exp<SYSDATE);
+     SELECT CARD_NUMBER || '%' || EXP BULK COLLECT INTO p_arr FROM (SELECT * FROM card WHERE exp<SYSDATE);
+     EXCEPTION
+     WHEN NO_DATA_FOUND THEN
+     p_arr(1) := 'Nu am gasit nici un card.';
 END show_due_date;
 
 PROCEDURE bank_cnp(cnp IN VARCHAR2, result OUT VARCHAR2) IS 

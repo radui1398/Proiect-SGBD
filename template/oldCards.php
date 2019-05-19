@@ -3,10 +3,10 @@
         <div class="card">
             <div class="card-body">
                 <?php
-                    require_once("template/Proceduri.php");
-                    $print = new Proceduri();
-                    $print->selectTransactions();
-                    $print->generateTransaction("Ultimele 10 Tranzactii");
+                require_once("template/Proceduri.php");
+                $print = new Proceduri();
+                $print->selectOldCards();
+                $print->generateOldCards("Carduri Expirate");
                 ?>
             </div>
         </div>

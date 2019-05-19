@@ -6,6 +6,7 @@ require_once ("template/Header.php");
 require_once ("template/functions.php");
 require_once ("template/Form.php");
 require_once ('template/Database.php');
+require_once ('util.php');
 $header = new Header("BMS");
 $header->generateHeader();
 ?>
@@ -46,6 +47,9 @@ $header->generateHeader();
                 case "last10tr":
                     include ("template/last10tr.php");
                     break;
+                case "oldCards":
+                    include ("template/oldCards.php");
+                    break;
                 default:
                     include("template/Home.php");
             }
@@ -68,5 +72,6 @@ $header->generateHeader();
 <script src="js/jquery-3.3.1.slim.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

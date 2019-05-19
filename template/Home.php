@@ -9,7 +9,7 @@
     </div>
     <div class="col">
         <?php
-        $list = array("Ultimele 10 tranzactii"=>"last10tr", "Plata Imprumut"=>"", "Modificare Dobanda"=>"", "Adaugare venit"=>"");
+        $list = array("Ultimele 10 tranzactii"=>"last10tr", "Carduri Expirate"=>"oldCards", "Modificare Dobanda"=>"", "Adaugare venit"=>"");
         $listGroup = new ListGroup("Proceduri", $list);
         $listGroup->generateGroup();
         ?>
