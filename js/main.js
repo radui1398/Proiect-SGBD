@@ -8,7 +8,7 @@ $( document ).ready(function() {
 });
 
 function searchCardByName() {
-    
+
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchByName");
     filter = input.value.toUpperCase();
