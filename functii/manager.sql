@@ -6,6 +6,7 @@
   PROCEDURE bank_cnp(cnp IN VARCHAR2, result OUT VARCHAR2);
   PROCEDURE top_bank(result OUT VARCHAR2);
   PROCEDURE delete_low_bank;
+  PROCEDURE delete_old_transactions(number_months NUMBER);
 END manager;
 /
 
@@ -91,5 +92,12 @@ sql_stmt:='SELECT IDBANK FROM (SELECT * FROM (SELECT IDBANK,SUM("COUNTED") AS "C
    sql_stmt:='DELETE FROM BANK WHERE ID=:1';
    EXECUTE IMMEDIATE sql_stmt USING BANK_ID;
 END delete_low_bank;
+
+PROCEDURE delete_old_transactions(number_months in NUMBER) IS 
+sql_stmt VARCHAR2(500);
+BEGIN
+    sql_stmt:='DELETE FROM TRANSACTION WHERE MONTHS_BETWEEN(SYSDATE,TRANSACTION_DATE)>=:1'; 
+    EXECUTE IMMEDIATE sql_stmt USING number_months;
+END DELETE_OLD_TRANSACTIONS;
 
 END manager;

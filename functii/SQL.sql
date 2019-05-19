@@ -1,11 +1,7 @@
 ﻿SET SERVEROUTPUT ON;
 BEGIN
-manager.DELETE_LOW_BANK();
+manager.DELETE_OLD_TRANSACTIONS(3);
 END;
-
-SELECT NULL FROM BANK WHERE id=26 FOR UPDATE NOWAIT;
-DELETE FROM BANK WHERE ID=28;
-COMMIT;
 
 SELECT NAME FROM (SELECT * FROM (SELECT name,SUM("COUNTED") AS "COUNTED" FROM (SELECT ba.name,COUNT(*) AS "COUNTED" FROM
  bank ba join branch br on ba.id=br.bank_id join managers ma on ma.fk_id=br.subsidiary_id 
