@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html lang="ro">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php
 require_once ("template/Header.php");
 require_once ("template/functions.php");
@@ -49,6 +50,9 @@ $header->generateHeader();
                     break;
                 case "oldCards":
                     include ("template/oldCards.php");
+                    break;
+                case "bank_cnp":
+                    include ("template/bank_cnp.php");
                     break;
                 default:
                     include("template/Home.php");

@@ -9,7 +9,7 @@ class Database
     private function __construct()
     {
         $db = "(DESCRIPTION=(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))))";
-        $conn = oci_connect("BMS", "BMS",$db);
+        $conn = oci_connect("BMS", "BMS",$db,'AL32UTF8');
         if (!$conn) {
             $m = oci_error();
             echo $m['message']. PHP_EOL;

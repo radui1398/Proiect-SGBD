@@ -56,11 +56,12 @@ class Proceduri
 
     public function generateOldCards($title){
         echo '<h5>'.$title.':</h5>';
-        echo '<input type="text" id="searchByName" onkeyup="searchCardByName()" placeholder="Cauta dupa ID">';
+        echo '<input type="text" id="searchByName" onkeyup="searchCardByName()" placeholder="Cauta dupa Nume">';
         echo '<table class="table table-hover " id="cardTable">
           <thead>
             <tr>
               <th scope="col">#</th>
+              <th scope="col">Nume Client</th>
               <th scope="col">Card ID</th>
               <th scope="col">Data EXP</th>
             </tr>
@@ -77,8 +78,8 @@ class Proceduri
         }
         echo '
           </tbody>
-        </table>
-        <button type="button" id="showMore" class="btn btn-secondary">Afiseaza inca 100</button>';
-
+        </table>';
     }
+
+    public function generateInput()
 }

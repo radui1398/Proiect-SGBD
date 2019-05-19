@@ -1,10 +1,6 @@
 var curSlice = 100;
 $( document ).ready(function() {
-    $("table > tbody > tr").hide().slice(0, curSlice).show();
-    $("#showMore").on("click", function() {
-        $("tbody > tr", $(this).prev()).slice(curSlice, 100+curSlice).show();
-        curSlice += 100;
-    });
+
 });
 
 function searchCardByName() {
