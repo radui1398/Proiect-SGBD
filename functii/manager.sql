@@ -6,7 +6,8 @@
   PROCEDURE bank_cnp(cnp IN VARCHAR2, result OUT VARCHAR2);
   PROCEDURE top_bank(result OUT VARCHAR2);
   PROCEDURE delete_low_bank;
-  PROCEDURE delete_old_transactions(number_months NUMBER);
+  PROCEDURE delete_old_transactions(number_months IN NUMBER);
+  FUNCTION atm_last_transaction(no_atm NUMBER) RETURN VARCHAR2;
 END manager;
 /
 
@@ -100,4 +101,15 @@ BEGIN
     EXECUTE IMMEDIATE sql_stmt USING number_months;
 END DELETE_OLD_TRANSACTIONS;
 
+FUNCTION atm_last_transaction(no_atm NUMBER) RETURN VARCHAR2 AS
+date_last_transaction VARCHAR2(20) := 'NO TRANSACTION';
+format_date VARCHAR2(10):='DD-MM-YYYY';
+sql_stmt VARCHAR2(500);
+BEGIN
+    sql_stmt:='SELECT TO_CHAR(TRANSACTION_DATE,:1) 
+    FROM (SELECT TRANSACTION_DATE FROM TRANSACTION WHERE ATM_ID=:2 
+    ORDER BY TRANSACTION_DATE) WHERE ROWNUM<2';
+    EXECUTE IMMEDIATE sql_stmt INTO date_last_transaction USING FORMAT_DATE, NO_ATM;
+    return date_last_transaction;
+END atm_last_transaction;
 END manager;
