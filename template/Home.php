@@ -9,8 +9,8 @@
     </div>
     <div class="col">
         <?php
-        $list = array("Adaugare Imprumut"=>"", "Plata Imprumut"=>"", "Modificare Dobanda"=>"", "Adaugare venit"=>"");
-        $listGroup = new ListGroup("Administrare buget", $list);
+        $list = array("Ultimele 10 tranzactii"=>"last10tr", "Plata Imprumut"=>"", "Modificare Dobanda"=>"", "Adaugare venit"=>"");
+        $listGroup = new ListGroup("Proceduri", $list);
         $listGroup->generateGroup();
         ?>
     </div>

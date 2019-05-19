@@ -43,6 +43,9 @@ $header->generateHeader();
                 case "addBank":
                     include ("template/addBank.php");
                     break;
+                case "last10tr":
+                    include ("template/last10tr.php");
+                    break;
                 default:
                     include("template/Home.php");
             }
