@@ -2,8 +2,19 @@
     <div class="col">
         <?php
         require_once("template/ListGroup.php");
-        $list = array("Ultimele tranzactii ATM"=>"atm_last_transaction", "Cel mai responsabil manager"=>"responsible_manager", "Tranzactiile clientului"=>"get_no_transactions", "Tranzactii invalide"=>"exp_transactions");
-        $listGroup = new ListGroup("Functii", $list);
+        $list = array(
+            "Banci"=>"view&table=BANK&pageNr=1",
+            "ATM"=>"view&table=ATM&pageNr=1",
+            "Conturi"=>"view&table=ACCOUNTS&pageNr=1",
+            "Carduri"=>"view&table=CARD&pageNr=1",
+            "Clienti"=>"view&table=CLIENTS&pageNr=1",
+            "Angajati"=>"view&table=EMPLOYEES&pageNr=1",
+            "Manageri"=>"view&table=MANAGERS&pageNr=1",
+            "Salarizare"=>"view&table=STANDARDIZATION&pageNr=1",
+            "Sucursale"=>"view&table=SUBSIDIARY&pageNr=1",
+            "Tranzactii"=>"view&table=TRANSACTION&pageNr=1",
+        );
+        $listGroup = new ListGroup("Vizualizare", $list);
         $listGroup->generateGroup();
         ?>
     </div>

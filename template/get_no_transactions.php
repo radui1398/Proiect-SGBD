@@ -2,9 +2,9 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
-                <h5>Afiseaza banca clientului</h5>
+                <h5>Numarul de tranzactii al unui client</h5>
                 <form class="form-inline" method="GET" action="index.php">
-                    <input type="hidden" name="page" value="bank_cnp">
+                    <input type="hidden" name="page" value="get_no_transactions">
                     <div class="form-group mr-3">
                         <input type="number" min="1000000000000" max="2999999999999" class="form-control" id="cnp" name="cnp" placeholder="CNP">
                     </div>
@@ -12,9 +12,9 @@
                 </form>
                 <?php
                 if(isset($_GET['cnp'])){
-                    require_once("template/Proceduri.php");
-                    $print = new Proceduri();
-                    $print->selectBank($_GET['cnp']);
+                    require_once("template/PFunc.php");
+                    $print = new PFunc();
+                    $print->get_no_transactions($_GET['cnp']);
                 }
                 ?>
             </div>

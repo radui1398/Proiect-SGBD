@@ -22,5 +22,8 @@ function getActive(){
         case "join":
             return "Join";
             break;
+        case "operatii":
+            return "Operatii Generale";
+            break;
     }
 }

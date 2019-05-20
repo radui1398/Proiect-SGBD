@@ -3,11 +3,11 @@
 <html lang="ro">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php
-require_once ("template/Header.php");
-require_once ("template/functions.php");
-require_once ("template/Form.php");
-require_once ('template/Database.php');
-require_once ('util.php');
+require_once("template/Header.php");
+require_once("template/functions.php");
+require_once("template/Form.php");
+require_once('template/Database.php');
+require_once('util.php');
 $header = new Header("BMS");
 $header->generateHeader();
 ?>
@@ -21,7 +21,7 @@ $header->generateHeader();
                 </div>
                 <div class="col">
                     <?php
-                    require_once ("template/Menu.php");
+                    require_once("template/Menu.php");
                     $menu = new Menu(1);
                     $active = getActive();
                     $menu->generateMenu($active);
@@ -38,25 +38,64 @@ $header->generateHeader();
     </div>
     <div class="container">
         <?php
-            switch(getVarFromPage("page")) {
-                case "join":
-                    include ("template/Join.php");
-                    break;
-                case "addBank":
-                    include ("template/addBank.php");
-                    break;
-                case "last10tr":
-                    include ("template/last10tr.php");
-                    break;
-                case "oldCards":
-                    include ("template/oldCards.php");
-                    break;
-                case "bank_cnp":
-                    include ("template/bank_cnp.php");
-                    break;
-                default:
-                    include("template/Home.php");
-            }
+        switch (getVarFromPage("page")) {
+            case "join":
+                include("template/Join.php");
+                break;
+            case "addBank":
+                include("template/addBank.php");
+                break;
+            case "last10tr":
+                include("template/last10tr.php");
+                break;
+            case "oldCards":
+                include("template/oldCards.php");
+                break;
+            case "bank_cnp":
+                include("template/bank_cnp.php");
+                break;
+            case "top_atm":
+                include("template/top_atm.php");
+                break;
+            case "top_bank":
+                include("template/top_bank.php");
+                break;
+            case "delete_bank":
+                include("template/delete_bank.php");
+                include("template/Home.php");
+                break;
+            case "delete_old_transaction":
+                include("template/delete_old_transaction.php");
+                include("template/Home.php");
+                break;
+            case "add_transaction":
+                include("template/add_transaction.php");
+                break;
+            case "atm_last_transaction":
+                include("template/atm_last_transaction.php");
+                break;
+            case "responsible_manager":
+                include("template/responsible_manager.php");
+                include("template/Home.php");
+                break;
+            case "get_no_transactions":
+                include("template/get_no_transactions.php");
+                break;
+            case "exp_transactions":
+                include("template/exp_transactions.php");
+                break;
+            case "operatii":
+                include("template/Operatii.php");
+                break;
+            case "view":
+                include("template/view_page.php");
+                break;
+            case "update":
+                include("template/update.php");
+                break;
+            default:
+                include("template/Home.php");
+        }
         ?>
     </div>
 </div>

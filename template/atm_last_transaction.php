@@ -2,19 +2,19 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
-                <h5>Afiseaza banca clientului</h5>
+                <h5>Data ultimei tranzactii</h5>
                 <form class="form-inline" method="GET" action="index.php">
-                    <input type="hidden" name="page" value="bank_cnp">
+                    <input type="hidden" name="page" value="atm_last_transaction">
                     <div class="form-group mr-3">
-                        <input type="number" min="1000000000000" max="2999999999999" class="form-control" id="cnp" name="cnp" placeholder="CNP">
+                        <input type="number" class="form-control" id="atm_id" name="atm_id" placeholder="ID ATM">
                     </div>
                     <button type="submit" class="btn btn-primary custom-button">Submit</button>
                 </form>
                 <?php
-                if(isset($_GET['cnp'])){
-                    require_once("template/Proceduri.php");
-                    $print = new Proceduri();
-                    $print->selectBank($_GET['cnp']);
+                if(isset($_GET['atm_id'])){
+                    require_once("template/PFunc.php");
+                    $print = new PFunc();
+                    $print->atm_last_transaction($_GET['atm_id']);
                 }
                 ?>
             </div>

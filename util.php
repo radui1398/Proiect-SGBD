@@ -12,7 +12,7 @@ function executeOci($stmt,$result){
                   </button>
                 </div>
                 ';
-    else if($result != 0)
+    else if($result)
         echo '
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                   '.$result.'
@@ -22,4 +22,8 @@ function executeOci($stmt,$result){
                 </div>
                 ';
     ini_set('display_errors', '1');
+}
+function sanitize_post($item)
+{
+    htmlspecialchars_decode(trim($item));
 }

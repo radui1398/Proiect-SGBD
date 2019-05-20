@@ -8,8 +8,8 @@
 
 class Menu
 {
-    private $menuOptions = array("Home","About Us","Join","Contact");
-    private $menuLinks = array("index.php","#","?page=join","#");
+    private $menuOptions = array("Home","Operatii Generale","Join","Contact");
+    private $menuLinks = array("index.php","?page=operatii","?page=join","#");
     private $menuType;
 
     public function __construct($type){

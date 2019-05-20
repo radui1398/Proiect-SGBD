@@ -3,11 +3,11 @@
         <div class="card">
             <div class="card-body">
                 <?php
-                $form = new Form();
-                $form->setLabels(array("NAME" => "Numele Bancii", "ADDRESS" => "Adresa Bancii"));
-                $form->create("BANK","ID");
-                $form->waitForPost();
-                $form->generate(); ?>
+                require_once("template/PFunc.php");
+                $print = new PFunc();
+                $print->select_exp_transactions();
+                $print->generate_exp_transactions("Tranzactii invalide");
+                ?>
             </div>
         </div>
     </div>

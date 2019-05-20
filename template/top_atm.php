@@ -3,11 +3,11 @@
         <div class="card">
             <div class="card-body">
                 <?php
-                $form = new Form();
-                $form->setLabels(array("NAME" => "Numele Bancii", "ADDRESS" => "Adresa Bancii"));
-                $form->create("BANK","ID");
-                $form->waitForPost();
-                $form->generate(); ?>
+                require_once("template/Proceduri.php");
+                $print = new Proceduri();
+                $print->selectATM();
+                $print->generateATM("TOP 5 ATM-uri");
+                ?>
             </div>
         </div>
     </div>
