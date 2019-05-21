@@ -23,6 +23,8 @@ class Form
         $i = 0;
         while ($row = oci_fetch_array($stid)) {
             $column_name = oci_result($stid, "COLUMN_NAME");
+            $column_type = oci_result($stid, "DATA_TYPE");
+            $column_len  = oci_result($stid, "DATA_LENGTH");
             array_push($this->dataToInsert, $column_name);
             if ($this->labels) {
                 foreach ($this->labels as $oldLabel => $newLabel) {
@@ -38,9 +40,20 @@ class Form
                     ($i % 2 == 0)?$i++:'';
                 }
                 else {
+                    switch($column_type){
+                        case "NUMBER":
+                            $inputType = 'type="text" pattern="\d*" title="Acest field trebuie sa contina doar numere." maxlength="'.$column_len.'"';
+                            break;
+                        case "FLOAT":
+                            $inputType = 'type="text" pattern="[0-9]+(\.[0-9]{0,2})?[0-9]+" title="Acest field trebuie sa contina doar float-uri." maxlength="'.$column_len.'"';
+                            break;
+                        default:
+                            $inputType = 'type="text" pattern="[A-ZĂÎȚÂȘa-zăîțșşâ0-9., ()]+" title="Acest input nu trebuie sa contina caractere speciale." maxlength="'.$column_len.'"';
+                            break;
+                    }
                     $form .= '<div class="form-group col-md-6">';
                     $form .= '<label for="form_' . $column_name . '">' . $column_name . '</label>';
-                    $form .= '<input type="text" class="form-control" id="' . $this->getPostName($column_name) . '" name="' . $this->getPostName($column_name) . '">';
+                    $form .= '<input '.$inputType.' class="form-control" id="' . $this->getPostName($column_name) . '" name="' . $this->getPostName($column_name) . '">';
                     $form .= '</div>';
                 }
                 ($i % 2 == 1) ? $form .= '</div>' : $form .= '';
@@ -147,6 +160,8 @@ class Form
         $idKey=0;
         while ($row = oci_fetch_array($stid)) {
             $column_name = oci_result($stid, "COLUMN_NAME");
+            $column_type = oci_result($stid, "DATA_TYPE");
+            $column_len  = oci_result($stid, "DATA_LENGTH");
             array_push($this->dataToInsert, $column_name);
             if ($this->labels) {
                 foreach ($this->labels as $oldLabel => $newLabel) {
@@ -162,9 +177,20 @@ class Form
                     ($i % 2 == 1)?$i++:'';
                 }
                 else {
+                    switch($column_type){
+                        case "NUMBER":
+                            $inputType = 'type="text" pattern="\d*" title="Acest field trebuie sa contina doar numere." maxlength="'.$column_len.'"';
+                            break;
+                        case "FLOAT":
+                            $inputType = 'type="text" pattern="[0-9]+(\.[0-9]{0,2})?[0-9]+" title="Acest field trebuie sa contina doar float-uri." maxlength="'.$column_len.'"';
+                            break;
+                        default:
+                            $inputType = 'type="text" pattern="[A-ZĂÎȚÂȘa-zăîțșşâ0-9., ()]+" title="Acest input nu trebuie sa contina caractere speciale." maxlength="'.$column_len.'"';
+                            break;
+                    }
                     $form .= '<div class="form-group col-md-6">';
                     $form .= '<label for="form_' . $column_name . '">' . $column_name . '</label>';
-                    $form .= '<input type="text" class="form-control" value="'.$_POST[$idKey].'" id="' . $this->getPostName($column_name) . '" name="' . $this->getPostName($column_name) . '">';
+                    $form .= '<input '.$inputType.' class="form-control" value="'.$_POST[$idKey].'" id="' . $this->getPostName($column_name) . '" name="' . $this->getPostName($column_name) . '">';
                     $form .= '</div>';
                 }
                 ($i % 2 == 1) ? $form .= '</div>' : $form .= '';

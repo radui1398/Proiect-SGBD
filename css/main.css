@@ -125,3 +125,6 @@ html{
     border: 1px solid #ddd;
     margin-bottom: 12px;
 }
+#map{
+    height:300px;
+}

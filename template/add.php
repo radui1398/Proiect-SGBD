@@ -27,9 +27,8 @@
                         "PHONE" => "Numar de telefon"
                     )
                 );
-
-                $form->createUpdate($_POST["table"],$_POST["ident"]);
-                $form->waitForPostUpdate();
+                $form->create($_GET['table'],$_GET['ident']);
+                $form->waitForPost();
                 $form->generate(); ?>
             </div>
         </div>

@@ -20,13 +20,21 @@
     </div>
     <div class="col">
         <?php
-        $list = array("Ultimele 10 tranzactii"=>"last10tr", "Carduri Expirate"=>"oldCards",
-            "Banca Clientului"=>"bank_cnp", "TOP 5 ATM-uri"=>"top_atm", "TOP 5 Banci"=>"top_bank",
-            "Sterge banca cu cei mai putini clienti" => "delete_bank",
-            "Sterge tranzactiile mai vechi de un an" => "delete_old_transaction",
-            "Adaugare Tranzactie" => "add_transaction",
-            "Adaugare banca" => "addBank");
-        $listGroup = new ListGroup("Proceduri", $list);
+        require_once("template/ListGroup.php");
+
+        $list = array(
+            "Banci"=>"add&table=BANK&ident=ID",
+            "ATM"=>"add&table=ATM&ident=ATM_NO",
+            "Conturi"=>"add&table=ACCOUNTS&ident=ID",
+            "Carduri"=>"add&table=CARD&ident=ID",
+            "Clienti"=>"add&table=CLIENTS&ident=ID",
+            "Angajati"=>"add&table=EMPLOYEES&ident=ID",
+            "Manageri"=>"add&table=MANAGERS&ident=ID",
+            "Salarizare"=>"add&table=STANDARDIZATION&ident=TYPE",
+            "Sucursale"=>"add&table=SUBSIDIARY&ident=ID",
+            "Tranzactii"=>"add&table=TRANSACTION&ident=ID",
+        );
+        $listGroup = new ListGroup("Inserare", $list);
         $listGroup->generateGroup();
         ?>
     </div>

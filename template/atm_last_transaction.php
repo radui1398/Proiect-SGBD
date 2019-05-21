@@ -23,7 +23,7 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                Sidebar
+                <div id="map"></div>
             </div>
         </div>
 
