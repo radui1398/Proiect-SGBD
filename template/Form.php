@@ -100,10 +100,6 @@ class Form
         oci_bind_array_by_name($stmt, ":columns", $this->dataToInsert, count($this->dataToInsert), -1, SQLT_CHR);
         oci_bind_array_by_name($stmt, ":data", $postData, count($postData), -1, SQLT_CHR);
 
-            // bind the ref cursor
-        // $refcur = oci_new_cursor(Database::getConn());
-        //oci_bind_by_name($stmt, ':REFCUR', $refcur, -1, OCI_B_CURSOR);
-
         // execute the statement
         ini_set('display_errors', '0');
         oci_execute($stmt);
@@ -182,6 +178,7 @@ class Form
         $form .= '<input type="hidden" value="'.$_POST["table"].'" name="table">';
         $form .= '<input type="hidden" value="'.$_POST["ident"].'" name="ident">';
         $form .= '<input type="hidden" value="'.$_POST["id"].'" name="id">';
+
         $form .= '<button type="submit" class="btn btn-primary custom-button" name="updateNOW">Update</button>';
         $form .= '</form>';
         $this->form = $form;
@@ -191,6 +188,8 @@ class Form
         if (isset($_POST['updateNOW'])) {
 
             $postData = array();
+            array_push($postData,$_POST['id']);
+            array_unshift($this->dataToInsert,$_POST['ident']);
             foreach ($this->postColumn as $column) {
                 array_push($postData, $_POST[$this->getPostName($column)]);
             }
@@ -208,28 +207,9 @@ class Form
             oci_bind_by_name($stmt, ':result', $result, 1000);
             oci_bind_array_by_name($stmt, ":columns", $this->dataToInsert, count($this->dataToInsert), 10000, SQLT_CHR);
             oci_bind_array_by_name($stmt, ":data", $postData, count($postData), 10000, SQLT_CHR);
-
-            ini_set('display_errors', '0');
             oci_execute($stmt);
-            if (oci_error($stmt))
-                echo '
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>Eroare:</strong> ' . oci_error($stmt)['message'] . '
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                ';
-            else
-                echo '
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  '.$result.'
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                ';
-            ini_set('display_errors', '1');
+            header("Location: index.php?page=view&table=".$this->table_name."&pageNr=1");
+
         }
 
     }

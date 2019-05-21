@@ -286,16 +286,16 @@ CREATE OR REPLACE PACKAGE BODY manager IS
         v_i := 3;
 
         LOOP
-            EXIT WHEN v_i = v_count;
+            EXIT WHEN v_i = v_count+1;
              IF (data(v_i) != 'sysdate')
              THEN
-              update_clause := update_clause ||' AND '|| type_column(v_i)||' = '|| l_single_quote || data(v_i) || l_single_quote;
+              update_clause := update_clause ||' , '|| type_column(v_i)||' = '|| l_single_quote || data(v_i) || l_single_quote;
              END IF;
              v_i := v_i + 1;
         END LOOP;
-        update_clause := update_clause||' WHERE '||type_column(1)||' = '||data(1);
-       -- EXECUTE IMMEDIATE update_clause;
-        result := update_clause;
+        update_clause := update_clause||' WHERE '||type_column(1)||' = :1';
+       EXECUTE IMMEDIATE update_clause USING data(1);
+        result := 'Update-ul a fost realizat cu succes';
     END update_entry_table;
 
 END manager;
