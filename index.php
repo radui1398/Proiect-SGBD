@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta charset="UTF-8">
 <?php
+require "vendor/autoload.php";
 require_once("template/Header.php");
 require_once("template/functions.php");
 require_once("template/Form.php");
@@ -39,6 +40,31 @@ $header->generateHeader();
     </div>
     <div class="container">
         <?php
+//        $geocoder = new \OpenCage\Geocoder\Geocoder('f1bce4d1ecdb4369aea3622e2a144338');
+//        $query = 'select ATM_NO,place from ATM';
+//        Database::getInstance();
+//        $stid = oci_parse(Database::getConn(), $query);
+//        oci_execute($stid);
+//        while ($row = oci_fetch_array($stid)) {
+//            $id = oci_result($stid, "ATM_NO");
+//            $postalCode = oci_result($stid, "PLACE");
+//            $postalCode .= ', Romania';
+//            die($postalCode);
+//            $result = $geocoder->geocode($postalCode);
+//            $lat = $result['results'][0]['geometry']['lat'];
+//            $lng = $result['results'][0]['geometry']['lng'];
+//
+//            $query = "BEGIN manager.INSERT_LONG_LAT_INTO_ATM(:lat,:long,:id); END;";
+//            $stmt = oci_parse(Database::getConn(), $query);
+//
+//            oci_bind_by_name($stmt, ':id', $id, 100);
+//            oci_bind_by_name($stmt, ':lat', $lat, 1000);
+//            oci_bind_by_name($stmt, ':long', $lng, 1000);
+//            oci_execute($stmt);
+//       }
+//        echo $lat,' si ', $lng;
+//        $marker=true;
+//        echo '<div id="map"></div>';
         switch (getVarFromPage("page")) {
             case "join":
                 include("template/Join.php");
@@ -127,35 +153,36 @@ $header->generateHeader();
             center: {lat: -34.397, lng: 150.644},
             zoom: 6
         });
+
         infoWindow = new google.maps.InfoWindow;
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                infoWindow.setPosition(pos);
-                infoWindow.setContent('Location found.');
-                infoWindow.open(map);
-                map.setCenter(pos);
-            }, function() {
-                handleLocationError(true, infoWindow, map.getCenter());
+                var curLocation = new google.maps.Marker({
+                    position:  {lat: position.coords.latitude, lng: position.coords.longitude},
+                    map: map,
+                    title: 'Locatia ta'
+                });
             });
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
         }
-    }
 
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-            'Error: The Geolocation service failed.' :
-            'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
+
+<!--        --><?php
+//
+//        if($marker==true){
+//            echo '
+//              var marker = new google.maps.Marker({
+//              position:  {lat: '.$lat.', lng: '.$lng.'},
+//              map: map,
+//              title: \'Cel mai apropiat ATM.\'
+//            });
+//            map.setZoom(13);
+//            map.setCenter(marker.position);
+//            ';
+//        }
+//
+//        ?>
     }
 </script>
 <script async defer

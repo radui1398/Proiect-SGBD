@@ -18,6 +18,12 @@
     FUNCTION get_no_transactions(v_CNP VARCHAR2) RETURN NUMBER;
     FUNCTION get_rejected_transactions RETURN v_array;
     FUNCTION no_of_lines(table_name IN VARCHAR2) RETURN NUMBER;
+    PROCEDURE sql_injection(id in VARCHAR2, result out VARCHAR2);
+    PROCEDURE sql_not_injection(id in VARCHAR2, result out VARCHAR2);
+    PROCEDURE INSERT_LONG_LAT_INTO_ATM(lat IN DOUBLE PRECISION ,  long IN DOUBLE PRECISION, id in NUMBER);
+    FUNCTION compute_distance (lat1 IN NUMBER,long1 IN NUMBER, lat2 IN NUMBER, long2 IN NUMBER,radius IN NUMBER DEFAULT 3963)
+    RETURN NUMBER;
+    PROCEDURE find_min_distance(lat1 IN NUMBER,long1 IN NUMBER,lat2 OUT NUMBER,long2 OUT NUMBER);
 END manager;
 /
 
@@ -298,4 +304,46 @@ CREATE OR REPLACE PACKAGE BODY manager IS
         result := 'Update-ul a fost realizat cu succes';
     END update_entry_table;
 
+    PROCEDURE sql_injection(id in VARCHAR2, result out VARCHAR2) IS
+       sqlstm varchar2(1000);
+    BEGIN
+        sqlstm := 'SELECT name FROM BANK WHERE id=''' || id || '''';
+        EXECUTE IMMEDIATE sqlstm into result;
+    END sql_injection;
+
+    PROCEDURE sql_not_injection(id in VARCHAR2, result out VARCHAR2) IS
+       sqlstm varchar2(1000);
+    BEGIN
+        sqlstm := 'SELECT name FROM BANK WHERE id=:1';
+        EXECUTE IMMEDIATE sqlstm into result using id;
+        EXCEPTION
+        WHEN INVALID_NUMBER THEN
+            result := 'Nu este permisa injectarea.';
+    END sql_not_injection;
+
+    PROCEDURE INSERT_LONG_LAT_INTO_ATM(lat IN DOUBLE PRECISION ,  long IN DOUBLE PRECISION, id in NUMBER) IS
+    v_count NUMBER;
+    sql_stmt VARCHAR2(5000);
+    BEGIN
+        sql_stmt:='UPDATE ATM SET latitudine='|| lat ||', longitudine=' || long || ' WHERE ATM_NO=' || id;
+        EXECUTE IMMEDIATE SQL_STMT;
+    END;
+
+    FUNCTION compute_distance (lat1 IN NUMBER,long1 IN NUMBER, lat2 IN NUMBER, long2 IN NUMBER,radius IN NUMBER DEFAULT 3963)
+    RETURN NUMBER IS
+    degreesToRadius NUMBER := 57.29577951;
+    BEGIN
+    RETURN(NVL(radius,0) * ACOS((SIN(NVL(lat1,0) / degreesToRadius) * SIN(NVL(lat2,0) / degreesToRadius)) +
+            (COS(NVL(lat1,0) / degreesToRadius) * COS(NVL(lat2,0) / degreesToRadius) *
+             COS(NVL(long2,0) / degreesToRadius - NVL(long1,0)/ degreesToRadius))));
+    END compute_distance;
+
+    PROCEDURE find_min_distance(lat1 IN NUMBER,long1 IN NUMBER,lat2 OUT NUMBER,long2 OUT NUMBER) AS
+    sql_stmt VARCHAR2(1000);
+    BEGIN
+          sql_stmt:='SELECT latitudine,longitudine
+         FROM (SELECT latitudine,longitudine,manager.compute_distance(latitudine,longitudine,lat1,long1) as "distance"
+         from ATM ORDER BY "distance" desc) where rownum<2';
+          EXECUTE IMMEDIATE sql_stmt INTO lat2,long2;
+    END find_min_distance;
 END manager;
