@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     height: 100%;
+    background-color: #f8f9fa;
 }
 
 html{
@@ -60,7 +61,7 @@ html{
     text-decoration: none;
 }
 .jumbotron{
-    background-color: white !important;
+    background-color: transparent;
 }
 
 .list-group-item.active{
@@ -69,19 +70,61 @@ html{
 }
 
 .credits{
-    font-size: 10px;
+    font-size: 12px;
     color: white;
-    padding: 2px;
+    padding: 5px;
     background-color: #27ae60;
     text-align: center;
     width:100%;
 }
 
 .footer-height{
-    height:30px;
+    height:40px;
 }
 
 .content{
     min-height:100%;
-    margin-bottom: -30px;
+    margin-bottom: 50px;
+}
+
+.custom-button{
+    background-color: #27ae60;
+    border-color: #2abc69;
+    border-radius: 0;
+    padding: 5px 10px 5px 10px;
+}
+
+.custom-button:hover, .custom-button:active, .custom-button:focus{
+    background-color: #2dbd64 !important;
+    border-color: #27ae60 !important;
+}
+.custom-button:focus{
+    box-shadow: 0 0 0 0.2rem rgba(0, 255, 69, 0.5) !important;
+}
+
+.form-control:focus{
+    box-shadow: 0 0 0 0.1rem rgba(0, 255, 69, 0.5) !important;
+}
+
+.card{
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0px;
+}
+
+.form-control{
+    border-radius: 0;
+    padding: 5px 10px 5px 10px;
+}
+
+#searchByName {
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+#map{
+    height:300px;
 }

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "opencage/geocode": "^2.0"
+    }
+}
